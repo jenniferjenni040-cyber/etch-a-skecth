@@ -1,43 +1,47 @@
-const box = document.querySelector("#box");
-const btn = document.querySelector("#btn");
+document.addEventListener("DOMContentLoaded", () => {
 
-function makeGrid(n) {
-    box.textContent = "";
+    const box = document.querySelector("#box");
+    const btn = document.querySelector("#btn");
 
-    let s = 960 / n;
+    function makeGrid(n) {
+        box.textContent = "";
 
-    for (let i = 0; i < n * n; i++) {
-        let d = document.createElement("div");
-        d.className = "cell";
+        let s = 960 / n;
 
-        d.style.width = s + "px";
-        d.style.height = s + "px";
+        for (let i = 0; i < n * n; i++) {
+            let d = document.createElement("div");
+            d.className = "cell";
 
-        d.dataset.o = 0;
+            d.style.width = s + "px";
+            d.style.height = s + "px";
 
-        d.addEventListener("mouseenter", () => {
-            let o = Number(d.dataset.o);
-            if (o < 1) o += 0.1;
-            d.dataset.o = o;
+            d.dataset.o = 0;
 
-            let r = Math.floor(Math.random() * 256);
-            let g = Math.floor(Math.random() * 256);
-            let b = Math.floor(Math.random() * 256);
+            d.addEventListener("mouseenter", () => {
+                let o = Number(d.dataset.o);
+                if (o < 1) o += 0.1;
+                d.dataset.o = o;
 
-            d.style.backgroundColor = `rgba(${r},${g},${b},${o})`;
-        });
+                let r = Math.floor(Math.random() * 256);
+                let g = Math.floor(Math.random() * 256);
+                let b = Math.floor(Math.random() * 256);
 
-        box.appendChild(d);
+                d.style.backgroundColor = `rgba(${r},${g},${b},${o})`;
+            });
+
+            box.appendChild(d);
+        }
     }
-}
 
-makeGrid(16);
+    makeGrid(16);
 
-btn.onclick = () => {
-    let v = prompt("Size (max 100)");
-    v = parseInt(v);
+    btn.onclick = () => {
+        let v = prompt("Size (max 100)");
+        v = parseInt(v);
 
-    if (v > 0 && v <= 100) {
-        makeGrid(v);
-    }
-};
+        if (v > 0 && v <= 100) {
+            makeGrid(v);
+        }
+    };
+
+});
